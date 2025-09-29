@@ -12,13 +12,29 @@
     {% endblock %}
 </head>
 <body class="text-white" style="background: #05472A;">
-<div class="flex flex-col justify-between min-h-screen relative">
-    
-        {% block body %}{% endblock %}
+    <div class="flex flex-col justify-between min-h-screen relative">
+        <div>
+            <header class="h-[114px] shrink-0 flex flex-col sm:flex-row items-center sm:justify-between py-4 sm:py-0 px-6 border-b border-white/20 shadow-md">
+                <a href="{{ path('app_homepage') }}">
+                    <img class="h-[42px]" src="{{ asset('images/starshop-logo.png') }}" alt="starshop logo">
+                </a>
+                <nav class="flex space-x-4 font-semibold">
+                    <a class="hover:text-amber-400 pt-2" href="{{ path('app_homepage') }}">
+                        Home
+                    </a>
+                    <a class="hover:text-amber-400  pt-2" href="#">
+                        About
+                    </a>
+                    <a class="hover:text-amber-400 pt-2" href="#">
+                        Contact
+                    </a>
+                </nav>
+            </header>
+            {% block body %}{% endblock %}
+        </div>
+        <div class="p-5 bg-white/5 mt-3 text-center">
+            Made by Duncan Phelps
+        </div>
     </div>
-    <div class="p-5 bg-white/5 mt-3 text-center">
-        Made by Duncan Phelps
-    </div>
-</div>
 </body>
 </html>
