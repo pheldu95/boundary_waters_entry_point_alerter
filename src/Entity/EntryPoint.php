@@ -7,7 +7,9 @@ use App\Repository\EntryPointRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EntryPointRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    paginationEnabled: false,
+)]
 class EntryPoint
 {
     #[ORM\Id]
@@ -19,10 +21,7 @@ class EntryPoint
     private ?string $name = null;
 
     #[ORM\Column]
-    private ?int $number = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $area = null;
+    private ?string $number = null;
 
     public function getId(): ?int
     {
@@ -41,26 +40,14 @@ class EntryPoint
         return $this;
     }
 
-    public function getNumber(): ?int
+    public function getNumber(): ?string
     {
         return $this->number;
     }
 
-    public function setNumber(int $number): static
+    public function setNumber(string $number): static
     {
         $this->number = $number;
-
-        return $this;
-    }
-
-    public function getArea(): ?string
-    {
-        return $this->area;
-    }
-
-    public function setArea(string $area): static
-    {
-        $this->area = $area;
 
         return $this;
     }
