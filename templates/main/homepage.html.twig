@@ -3,5 +3,33 @@
 {% block title %}Boundary Waters Entry Point Alerter!{% endblock %}
 
 {% block body %}
-    <main>Get started!</main>
+    <div class="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] text-center px-4">
+    <div class="max-w-2xl space-y-8">
+        <h1 class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-amber-200 bg-clip-text text-transparent leading-tight">
+            Don't miss out on your favorite entry point!
+        </h1>
+
+        <p class="text-xl md:text-2xl text-white/90 leading-relaxed">
+            Receive an email when a permit becomes available at your desired entry point
+        </p>
+        
+        <div class="pt-4">
+            <a href="{{ path('app_entry_points_list') }}" class="bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold text-xl px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 inline-flex items-center space-x-2">
+                <span>Get Started!</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+            </a>
+        </div>
+        
+        <div class="flex items-center justify-center space-x-8 pt-8 text-white/70">
+            <div class="flex items-center space-x-2">
+                <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm">Free to Use</span>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
