@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class EntryPointController extends AbstractController
 {
     #[Route('/entry_points', name: 'app_entry_points')]
-    public function getCollection(EntryPointRepository $entryPointRepository): Response
+    public function list(EntryPointRepository $entryPointRepository): Response
     {
         $entryPoints = $entryPointRepository->findAll();
         return $this->render('entryPoint/entryPoints.html.twig', [
@@ -20,7 +20,7 @@ class EntryPointController extends AbstractController
     }
 
     #[Route('/entry_points/{id<\d+>}', name: 'app_entry_point')]
-    public function getOne(int $id, EntryPointRepository $entryPointRepository)
+    public function show(int $id, EntryPointRepository $entryPointRepository)
     {
         $entryPoint = $entryPointRepository->findOneBy(['number' => $id]);
 
