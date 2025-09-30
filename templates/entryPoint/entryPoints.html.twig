@@ -3,7 +3,7 @@
 {% block title %}Entry Points{% endblock %}
 
 {% block body %}
-    {% for enytryPoint in entryPoints %}
-        <h1>{{ enytryPoint.name }}</h1>
+    {% for entryPoint in entryPoints %}
+        <a href="{{ path('app_entry_point_show', { id: entryPoint.number }) }}">{{ entryPoint.name }}</a>
     {% endfor %}
 {% endblock %}
