@@ -1,27 +1,31 @@
 <div data-controller="closeable">
-    <!-- Burger button (hidden by default) -->
+    <!-- Burger button -->
     <button 
         data-closeable-target="toggleButton"
         data-action="click->closeable#open"
-        class="hidden fixed z-50 p-3 text-white hover:bg-white/10 rounded-lg transition-colors"
+        class="hidden fixed z-50 p-3 text-white hover:bg-white/10 rounded-lg transition-colors group"
         aria-label="Open menu"
     >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
-            <path fill="#fff" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
-        </svg>
+        <div class="w-6 h-5 relative flex flex-col justify-between">
+            <span class="w-full h-0.5 bg-white transition-all duration-300 ease-in-out"></span>
+            <span class="w-full h-0.5 bg-white transition-all duration-300 ease-in-out"></span>
+            <span class="w-full h-0.5 bg-white transition-all duration-300 ease-in-out"></span>
+        </div>
     </button>
 
     <!-- Sidebar -->
     <aside 
         data-closeable-target="sidebar"
-        class="pb-8 lg:pb-0 lg:w-[411px] shrink-0 lg:block lg:min-h-screen text-white px-8 border-b lg:border-b-0 lg:border-r border-white/20 transition-all overflow-hidden"
+        class="pb-8 lg:pb-0 lg:w-[411px] shrink-0 lg:block lg:min-h-screen text-white px-8 border-b lg:border-b-0 lg:border-l border-white/20 transition-all overflow-hidden"
     >
         <div class="flex justify-between mt-11 mb-7">
             <h2 class="text-[32px] font-semibold">Menu</h2>
-            <button data-action="click->closeable#close">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512">
-                    <path fill="#fff" d="M384 96c0-17.7 14.3-32 32-32s32 14.3 32 32V416c0 17.7-14.3 32-32 32s-32-14.3-32-32V96zM9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L109.3 224 288 224c17.7 0 32 14.3 32 32s-14.3 32-32 32l-178.7 0 73.4 73.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-128-128z"/>
-                </svg>
+            <button data-action="click->closeable#close" class="group">
+                <!-- Animated X button that turns into burger -->
+                <div class="w-6 h-5 relative flex flex-col justify-center items-center">
+                    <span class="absolute w-full h-0.5 bg-white transition-all duration-300 ease-in-out rotate-45"></span>
+                    <span class="absolute w-full h-0.5 bg-white transition-all duration-300 ease-in-out -rotate-45"></span>
+                </div>
             </button>
         </div>
         <div>
@@ -31,7 +35,7 @@
                     <p class="uppercase text-xs">Tracking x Entry Point(s)</p>
                 </div>
                 <h3 class="tracking-tight text-[22px] font-semibold">
-                    <a class="hover:underline" href="">My Tracked Entry Points</a>
+                    <a class="hover:text-amber-400 transition-colors duration-200" href="">My Tracked Entry Points</a>
                 </h3>
             </div>
         </div>

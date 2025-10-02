@@ -2,11 +2,13 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
     static targets = ["sidebar", "toggleButton"]
+    static classes = ["open"]
     
     connect() {
-        // Store the initial width
+        //Store the initial width
         this.originalWidth = this.sidebarTarget.offsetWidth + 'px';
         this.sidebarTarget.style.width = this.originalWidth;
+        this.isOpen = true;
     }
 
     async close() {
@@ -16,9 +18,10 @@ export default class extends Controller {
         
         await this.#waitForAnimationEnd();
         
-        // Show the burger button
+        //Show and animate the burger button
         if (this.hasToggleButtonTarget) {
             this.toggleButtonTarget.classList.remove('hidden');
+            this.isOpen = false;
         }
     }
 
@@ -27,9 +30,18 @@ export default class extends Controller {
         this.sidebarTarget.style.padding = '';
         this.sidebarTarget.style.borderWidth = '';
         
-        // Hide the burger button
+        //Hide the burger button
         if (this.hasToggleButtonTarget) {
             this.toggleButtonTarget.classList.add('hidden');
+            this.isOpen = true;
+        }
+    }
+
+    toggle() {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
         }
     }
 
