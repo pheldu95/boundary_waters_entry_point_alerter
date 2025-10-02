@@ -17,13 +17,14 @@
         <header class="backdrop-blur-sm bg-white/5 border-b border-white/10 shadow-lg sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
-                    <div class="flex items-center space-x-2">
-                        <span class="text-2xl">⚫️</span>
-                        <span class="text-xl font-bold bg-gradient-to-r from-white to-amber-200 bg-clip-text text-transparent">
-                            Boundary Waters Entry Point Alerter
-                        </span>
-                    </div>
-                    
+                    <a href="{{ path('app_homepage') }}">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">⚫️</span>
+                            <span class="text-xl font-bold bg-gradient-to-r from-white to-amber-200 bg-clip-text text-transparent">
+                                Boundary Waters Entry Point Alerter
+                            </span>
+                        </div>
+                    </a>
                     <nav class="hidden sm:flex space-x-8">
                         <a class="text-white/90 hover:text-amber-400 transition-colors duration-200 font-medium" href="{{ path('app_homepage') }}">
                             Home
@@ -60,8 +61,11 @@
         </header>
 
         <main class="flex-1">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {% block body %}{% endblock %}
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex gap-6">
+                <div class="flex-1">
+                    {% block body %}{% endblock %}
+                </div>
+                {{ include('main/_asideMenu.html.twig') }}
             </div>
         </main>
 
