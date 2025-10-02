@@ -4,14 +4,13 @@ export default class extends Controller {
     static targets = ["sidebar", "toggleButton", "burgerIcon", "closeIcon"]
     
     connect() {
-        // Store the initial width
-        this.originalWidth = this.sidebarTarget.offsetWidth + 'px';
-        this.sidebarTarget.style.width = this.originalWidth;
-        this.isOpen = true;
-        
-        // Show X icon initially (sidebar is open)
-        this.updateIcon();
-    }
+    // Set the width we want when open
+    this.originalWidth = '411px';
+    
+    // Start closed (already set in HTML)
+    this.isOpen = false;
+    this.updateIcon();
+}
 
     async close() {
         this.sidebarTarget.style.width = '0';
@@ -26,7 +25,7 @@ export default class extends Controller {
 
     open() {
         this.sidebarTarget.style.width = this.originalWidth;
-        this.sidebarTarget.style.padding = '';
+        this.sidebarTarget.style.padding = '0 2rem';
         this.sidebarTarget.style.borderWidth = '';
         
         this.isOpen = true;
