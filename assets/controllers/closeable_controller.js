@@ -1,14 +1,16 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ["sidebar", "toggleButton"]
-    static classes = ["open"]
+    static targets = ["sidebar", "toggleButton", "burgerIcon", "closeIcon"]
     
     connect() {
-        //Store the initial width
+        // Store the initial width
         this.originalWidth = this.sidebarTarget.offsetWidth + 'px';
         this.sidebarTarget.style.width = this.originalWidth;
         this.isOpen = true;
+        
+        // Show X icon initially (sidebar is open)
+        this.updateIcon();
     }
 
     async close() {
@@ -18,11 +20,8 @@ export default class extends Controller {
         
         await this.#waitForAnimationEnd();
         
-        //Show and animate the burger button
-        if (this.hasToggleButtonTarget) {
-            this.toggleButtonTarget.classList.remove('hidden');
-            this.isOpen = false;
-        }
+        this.isOpen = false;
+        this.updateIcon();
     }
 
     open() {
@@ -30,11 +29,8 @@ export default class extends Controller {
         this.sidebarTarget.style.padding = '';
         this.sidebarTarget.style.borderWidth = '';
         
-        //Hide the burger button
-        if (this.hasToggleButtonTarget) {
-            this.toggleButtonTarget.classList.add('hidden');
-            this.isOpen = true;
-        }
+        this.isOpen = true;
+        this.updateIcon();
     }
 
     toggle() {
@@ -42,6 +38,18 @@ export default class extends Controller {
             this.close();
         } else {
             this.open();
+        }
+    }
+
+    updateIcon() {
+        if (this.isOpen) {
+            // Show X, hide burger
+            this.burgerIconTarget.classList.add('hidden');
+            this.closeIconTarget.classList.remove('hidden');
+        } else {
+            // Show burger, hide X
+            this.burgerIconTarget.classList.remove('hidden');
+            this.closeIconTarget.classList.add('hidden');
         }
     }
 
