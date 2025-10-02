@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\User;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -15,8 +16,11 @@ final class UserFactory extends PersistentProxyObjectFactory
      *
      * @todo inject services if required
      */
-    public function __construct()
+    public function __construct(
+        private UserPasswordHasherInterface $passwordHasher
+    )
     {
+        parent::__construct();
     }
 
     public static function class(): string
@@ -44,7 +48,12 @@ final class UserFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(User $user): void {})
+            ->afterInstantiate(function(User $user): void {
+                $user->setPassword($this->passwordHasher->hashPassword(
+                    $user,
+                    $user->getPassword()
+                ));
+            })
         ;
     }
 }
