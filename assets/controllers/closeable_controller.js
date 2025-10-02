@@ -1,22 +1,41 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
+    static targets = ["sidebar", "toggleButton"]
+    
     connect() {
         // Store the initial width
-        this.originalWidth = this.element.offsetWidth + 'px';
-        this.element.style.width = this.originalWidth;
+        this.originalWidth = this.sidebarTarget.offsetWidth + 'px';
+        this.sidebarTarget.style.width = this.originalWidth;
     }
 
-    async close () {
-        this.element.style.width = '0'; //first set width to 0 to trigger transition
+    async close() {
+        this.sidebarTarget.style.width = '0';
+        this.sidebarTarget.style.padding = '0';
+        this.sidebarTarget.style.borderWidth = '0';
+        
+        await this.#waitForAnimationEnd();
+        
+        // Show the burger button
+        if (this.hasToggleButtonTarget) {
+            this.toggleButtonTarget.classList.remove('hidden');
+        }
+    }
 
-        await this.#waitForAnimationEnd(); //wait for the animation to finish
-        this.element.remove(); //then remove the element entirely
+    open() {
+        this.sidebarTarget.style.width = this.originalWidth;
+        this.sidebarTarget.style.padding = '';
+        this.sidebarTarget.style.borderWidth = '';
+        
+        // Hide the burger button
+        if (this.hasToggleButtonTarget) {
+            this.toggleButtonTarget.classList.add('hidden');
+        }
     }
 
     #waitForAnimationEnd() {
         return Promise.all(
-            this.element.getAnimations().map((animation) => animation.finished),
+            this.sidebarTarget.getAnimations().map((animation) => animation.finished),
         );
     }
 }
