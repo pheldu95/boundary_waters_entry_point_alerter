@@ -29,19 +29,27 @@
         <div class="flex justify-between mt-11 mb-7">
             <h2 class="text-[32px] font-semibold">Menu</h2>
         </div>
-        <div>
-            <div class="flex flex-col space-y-1.5">
-                <div class="rounded-2xl py-1 px-3 flex justify-center w-50 items-center" style="background: rgba(255, 184, 0, .1);">
-                    <div class="rounded-full h-2 w-2 bg-amber-400 blur-[1px] mr-2"></div>
-                    <p class="uppercase text-xs">Tracking x Entry Point(s)</p>
+        {% if app.user %}
+            <div>
+                <div class="flex flex-col space-y-1.5">
+                    <div class="rounded-2xl py-1 px-3 flex justify-center w-50 items-center" style="background: rgba(255, 184, 0, .1);">
+                        <div class="rounded-full h-2 w-2 bg-amber-400 blur-[1px] mr-2"></div>
+                        <p class="uppercase text-xs">Tracking x Entry Point(s)</p>
+                    </div>
+                    <h3 class="tracking-tight text-[22px] font-semibold">
+                        <a class="hover:text-amber-400 transition-colors duration-200" href="">My Tracked Entry Points</a>
+                    </h3>
+                    <h3 class="tracking-tight text-[22px] font-semibold">
+                        <a href="{{ path('app_logout') }}" class="hover:text-amber-400 transition-colors duration-200" href="">Logout</a>
+                    </h3>
                 </div>
+            </div>
+        {% else %}
+            <div>
                 <h3 class="tracking-tight text-[22px] font-semibold">
-                    <a class="hover:text-amber-400 transition-colors duration-200" href="">My Tracked Entry Points</a>
-                </h3>
-                <h3 class="tracking-tight text-[22px] font-semibold">
-                    <a href="{{ path('app_logout') }}" class="hover:text-amber-400 transition-colors duration-200" href="">Logout</a>
+                    <a href="{{ path('app_login') }}" class="hover:text-amber-400 transition-colors duration-200" href="">Login</a>
                 </h3>
             </div>
-        </div>
+        {% endif %}
     </aside>
 </div>
