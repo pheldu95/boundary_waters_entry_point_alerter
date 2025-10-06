@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -46,6 +48,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private bool $isVerified = false;
+
+    /**
+     * @var Collection<int, PermitWatch>
+     */
+    #[ORM\OneToMany(targetEntity: PermitWatch::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $permitWatches;
+
+    public function __construct()
+    {
+        $this->permitWatches = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +149,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PermitWatch>
+     */
+    public function getPermitWatches(): Collection
+    {
+        return $this->permitWatches;
+    }
+
+    public function addPermitWatch(PermitWatch $permitWatch): static
+    {
+        if (!$this->permitWatches->contains($permitWatch)) {
+            $this->permitWatches->add($permitWatch);
+            $permitWatch->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePermitWatch(PermitWatch $permitWatch): static
+    {
+        if ($this->permitWatches->removeElement($permitWatch)) {
+            // set the owning side to null (unless already changed)
+            if ($permitWatch->getUser() === $this) {
+                $permitWatch->setUser(null);
+            }
+        }
 
         return $this;
     }
