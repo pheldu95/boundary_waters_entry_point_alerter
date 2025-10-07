@@ -5,7 +5,7 @@
 {% block body %}
     <form class="max-w-sm mx-auto p-6 bg-black/20 backdrop-blur-sm rounded-lg shadow-md" method="post" action="">
         <label for="entryPoints" class="block mb-2 text-sm font-medium text-gray-900 text-white">Entry Point</label>
-        <select id="entryPoints" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select id="entryPoints" name="_entryPoints" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option selected>Choose an Entry Point</option>
             {% for entryPoint in entryPoints %}
                 <option value="{{ entryPoint.number }}">{{ entryPoint.number }} - {{ entryPoint.name }}</option>
@@ -25,11 +25,11 @@
                 </div>
                 
                 <input 
-                type="date" 
-                id="datepicker-styled" 
-                name="datepicker_styled"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value="{{ selectedDate|default('') }}"
+                    type="date" 
+                    id="datepicker-styled" 
+                    name="_datepicker"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value="{{ selectedDate|default('') }}"
                 >
             </div>
         </div>
