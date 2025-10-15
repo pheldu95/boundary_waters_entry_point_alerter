@@ -18,9 +18,27 @@ services:
       # - ./docker/db/data:/var/lib/mysql:rw
     ports:
       - "3307:3306"
+  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: boundary_waters_entry_point_alerter_rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - symfony_network
 ###< doctrine/doctrine-bundle ###
 
+networks:
+  symfony_network:
+    driver: bridge
 volumes:
 ###> doctrine/doctrine-bundle ###
   database_data:
+  rabbitmq_data:
 ###< doctrine/doctrine-bundle ###
