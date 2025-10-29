@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\PermitWatch;
 use App\Form\PermitWatchType;
+use App\Repository\PermitWatchRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,17 @@ class PermitWatchController extends AbstractController
         
         return $this->render('permitWatch/new.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/permit_watches', name: 'app_my_permit_watches')]
+    public function show(PermitWatchRepository $permitWatchRepository): Response
+    {
+        $user = $this->getUser();
+        $permitWatches = $permitWatchRepository->findBy(['user' => $user]);
+
+        return $this->render('permitWatch/permitWatches.html.twig', [
+            'permitWatches' => $permitWatches,
         ]);
     }
 }
