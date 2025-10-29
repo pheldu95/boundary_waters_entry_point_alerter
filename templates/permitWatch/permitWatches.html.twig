@@ -3,9 +3,13 @@
 {% block title %}My Permit Watches{% endblock %}
 
 {% block body %}
-    {% for permitWatch in permitWatches %}
-        <div class="p-4 mb-4 text-red-800 bg-red-100 rounded-lg">
-            {{ permitWatch.entrypoint.name }}
-        </div>
-    {% endfor %}
+    {% embed 'components/card/defaultCard.html.twig' %}
+        {% block card_content %}
+            {% for permitWatch in permitWatches %}
+                <div class="p-4 mb-4 text-red-800 bg-red-100 rounded-lg">
+                    {{ permitWatch.entrypoint.name }}
+                </div>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
