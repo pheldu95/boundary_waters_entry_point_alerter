@@ -1,44 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My Permit Watches{% endblock %}
+{% block title %}My Permit Watches
+{% endblock %}
 
 {% block body %}
-    {% embed 'components/card/defaultCard.html.twig' %}
-        {% block card_content %}
-            {# Todo: add something saying "no permit watches" and then a create button. for when the user doesn't have any yet #}
-            <ul class="max-w-md mx-auto">
-                {% for permitWatch in permitWatches %}
-                    <li class="pb-3 sm:pb-4 bg-white/30 rounded-lg mb-4 p-4">
-                        <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                            {# <div class="shrink-0">
-                                <img class="w-8 h-8 rounded-full" src="" alt="">
-                            </div> #}
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    {{ permitWatch.entryPoint.name }}
-                                </p>
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    {{ permitWatch.targetDate|date('F j, Y') }}
-                                </p>
-                            </div>
-                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
-                                {% embed 'components/button/defaultButton.html.twig' %}
-                                    {% block button_content %}
-                                        Edit
-                                    {% endblock %}
-                                {% endembed %}
-                            </div>
-                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
-                                {% embed 'components/button/deleteButton.html.twig' %}
-                                    {% block button_content %}
-                                        Delete
-                                    {% endblock %}
-                                {% endembed %}
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endblock %}
-    {% endembed %}
+	{# Todo: add something saying "no permit watches" and then a create button. for when the user doesn't have any yet #}
+	<ul class="bg-white shadow overflow-hidden sm:rounded-md max-w-sm mx-auto">
+		{% for permitWatch in permitWatches %}
+			<li class="border-t border-gray-200">
+				<div class="px-4 py-5 sm:px-6">
+					<div class="flex items-center justify-between">
+						<div>
+							<h3 class="text-lg leading-6 font-medium text-gray-900">{{ permitWatch.entryPoint.name }}</h3>
+							<p class="mt-1 max-w-2xl text-sm text-gray-500">{{ permitWatch.targetDate|date('F j, Y') }}</p>
+						</div>
+						<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
+							{% embed 'components/button/defaultButton.html.twig' %}
+								{% block button_content %}
+									Edit
+								{% endblock %}
+							{% endembed %}
+						</div>
+						<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
+							{% embed 'components/button/deleteButton.html.twig' %}
+								{% block button_content %}
+									Delete
+								{% endblock %}
+							{% endembed %}
+						</div>
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
 {% endblock %}
