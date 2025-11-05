@@ -51,8 +51,12 @@ class PermitWatchController extends AbstractController
     }
 
     #[Route('/permit_watch/delete/{id}', name: 'app_permit_watch_delete')]
-    public function delete(PermitWatch $permitWatch, EntityManagerInterface $em): Response
+    public function delete(Request $request, PermitWatch $permitWatch, EntityManagerInterface $em): Response
     {
+        if (!$this->isCsrfTokenValid('delete'.$permitWatch->getId(), $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Invalid CSRF token.');
+        }
+
         //Ensure the permit watch belongs to the current user
         if ($permitWatch->getUser() !== $this->getUser()) {
             throw $this->createAccessDeniedException('You do not have permission to delete this permit watch.');
