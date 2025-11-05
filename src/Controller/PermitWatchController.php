@@ -31,7 +31,7 @@ class PermitWatchController extends AbstractController
             
             $this->addFlash('success', 'Permit watch created successfully!');
             
-            return $this->redirectToRoute('app_homepage');
+            return $this->redirectToRoute('app_my_permit_watches');
         }
         
         return $this->render('permitWatch/new.html.twig', [

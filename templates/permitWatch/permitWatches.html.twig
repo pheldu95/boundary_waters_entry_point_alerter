@@ -4,40 +4,53 @@
 {% endblock %}
 
 {% block body %}
-	{# Todo: add something saying "no permit watches" and then a create button. for when the user doesn't have any yet #}
-	<h1 class="text-xl md:text-2xl text-white/90 leading-relaxed font-bold bg-clip-text leading-tight justify-center text-center mb-8">
-		Tracked Entry Points
-	</h1>
-	<ul class="bg-white shadow overflow-hidden sm:rounded-md max-w-sm mx-auto">
-		{% for permitWatch in permitWatches %}
-			<li class="border-t border-gray-200">
-				<div class="px-4 py-5 sm:px-6">
-					<div class="flex items-center justify-between">
-						<div>
-							<h3 class="text-lg leading-6 font-medium text-gray-900">
-								{{ permitWatch.entryPoint.number }}.
-								{{ permitWatch.entryPoint.name }}
-							</h3>
-							<p class="mt-1 max-w-2xl text-sm text-gray-500">{{ permitWatch.targetDate|date('F j, Y') }}</p>
-						</div>
-						<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
-							{% embed 'components/button/defaultButton.html.twig' %}
-								{% block button_content %}
-									Edit
-								{% endblock %}
-							{% endembed %}
-						</div>
-						<form action="{{ path('app_permit_watch_delete', {'id': permitWatch.id})}}" method="post" class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
-							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ permitWatch.id) }}">
-							{% embed 'components/button/deleteButton.html.twig' %}
-								{% block button_content %}
-									Delete
-								{% endblock %}
-							{% endembed %}
-						</form>
-					</div>
-				</div>
-			</li>
-		{% endfor %}
-	</ul>
+    {% if permitWatches|length > 0 %}
+        <h1 class="text-xl md:text-2xl text-white/90 leading-relaxed font-bold bg-clip-text leading-tight justify-center text-center mb-8">
+            Tracked Entry Points
+        </h1>
+        <ul class="bg-white shadow overflow-hidden sm:rounded-md max-w-sm mx-auto">
+            {% for permitWatch in permitWatches %}
+                <li class="border-t border-gray-200">
+                    <div class="px-4 py-5 sm:px-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                    {{ permitWatch.entryPoint.number }}.
+                                    {{ permitWatch.entryPoint.name }}
+                                </h3>
+                                <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ permitWatch.targetDate|date('F j, Y') }}</p>
+                            </div>
+                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
+                                {% embed 'components/button/defaultButton.html.twig' %}
+                                    {% block button_content %}
+                                        Edit
+                                    {% endblock %}
+                                {% endembed %}
+                            </div>
+                            <form action="{{ path('app_permit_watch_delete', {'id': permitWatch.id})}}" method="post" class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ permitWatch.id) }}">
+                                {% embed 'components/button/deleteButton.html.twig' %}
+                                    {% block button_content %}
+                                        Delete
+                                    {% endblock %}
+                                {% endembed %}
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1 class="text-xl md:text-2xl text-white/90 leading-relaxed font-bold bg-clip-text leading-tight justify-center text-center">
+            You have no tracked entry points.
+        </h1>
+        <div class="pt-4 justify-center flex">
+            <a href="{{ path('app_permit_watch_new') }}" class="bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold text-xl px-8 py-4 rounded-lg shadow-lg hover:shadow-2xl hover:shadow-amber-400/60 transform hover:scale-105 hover:-translate-y-1 transition-all duration-300 inline-flex items-center space-x-2">
+                <span>Create a Permit Watch</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+            </a>
+        </div>
+    {% endif %}
 {% endblock %}
