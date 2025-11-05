@@ -1,3 +1,6 @@
+# To do:
+1. I don't like the name PermitWatch entity. Want to change it to TrackedEntryPoint.
+
 # Symfony Docker
 
 A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,

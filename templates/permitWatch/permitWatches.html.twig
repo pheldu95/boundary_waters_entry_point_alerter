@@ -50,11 +50,8 @@
 							</div>
 							<form action="{{ path('app_permit_watch_delete', {'id': permitWatch.id})}}" method="post" class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
 								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ permitWatch.id) }}">
-								{% embed 'components/button/deleteButton.html.twig' %}
-									{% block button_content %}
-										Delete
-									{% endblock %}
-								{% endembed %}
+								{% import "macros/button/deleteButton.html.twig" as deleteButton %}
+                                {{ deleteButton.deleteButton('') }}
 							</form>
 						</div>
 					</div>
