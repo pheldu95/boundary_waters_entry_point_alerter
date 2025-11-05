@@ -21,13 +21,13 @@
 								{% endblock %}
 							{% endembed %}
 						</div>
-						<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
+						<form action="{{ path('app_permit_watch_delete', {'id': permitWatch.id})}}" method="post" class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ps-1">
 							{% embed 'components/button/deleteButton.html.twig' %}
-								{% block button_content %}
-									Delete
-								{% endblock %}
+                                    {% block button_content %}
+                                        Delete
+                                    {% endblock %}
 							{% endembed %}
-						</div>
+						</form>
 					</div>
 				</div>
 			</li>

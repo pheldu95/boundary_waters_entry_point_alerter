@@ -49,4 +49,20 @@ class PermitWatchController extends AbstractController
             'permitWatches' => $permitWatches,
         ]);
     }
+
+    #[Route('/permit_watch/delete/{id}', name: 'app_permit_watch_delete')]
+    public function delete(PermitWatch $permitWatch, EntityManagerInterface $em): Response
+    {
+        //Ensure the permit watch belongs to the current user
+        if ($permitWatch->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You do not have permission to delete this permit watch.');
+        }
+
+        $em->remove($permitWatch);
+        $em->flush();
+
+        $this->addFlash('success', 'Permit watch deleted successfully!');
+
+        return $this->redirectToRoute('app_my_permit_watches');
+    }
 }
