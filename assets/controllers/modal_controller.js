@@ -12,4 +12,10 @@ export default class extends Controller {
         this.dialogTarget.close();
         document.body.classList.remove('overflow-hidden', 'blur-sm');
     }
+
+    clickOutside(event) { //close modal when clicking outside of it
+        if (event.target === this.dialogTarget) {
+            this.dialogTarget.close();
+        }
+    }
 }

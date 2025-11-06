@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+/* fade in animation from tailwind that we will use for the modal */
+@theme { 
+  --animate-fade-in: fadeIn .5s ease-out;
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+}
