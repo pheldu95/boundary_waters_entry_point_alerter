@@ -1,10 +1,19 @@
 <div>
-    <!-- Your form HTML here -->
-    <form>
-        <!-- Use the component properties -->
-        <input type="hidden" name="permitWatchId" value="{{ permitWatchId }}">
-        <input type="hidden" name="entryPointId" value="{{ entryPointId }}">
-        <input type="date" name="targetDate" value="{{ targetDate }}">
-        <!-- Rest of your form -->
-    </form>
+	<!-- Your form HTML here -->
+	<form>
+		<select data-model="entryPoint" id="entry-point" class="form-control {{ _errors.has('entryPoint') ? 'is-invalid' }}">
+			<option value="">Choose an EntryPoint</option>
+			{% for entryPoint in entryPoints %}
+				<option value="{{ entryPoint.id }}" {{ this.isCurrentEntryPoint(entryPoint) ? 'selected' }}>{{ entryPoint.name }}</option>
+			{% endfor %}
+		</select>
+		{% if _errors.has('entryPoint') %}
+			<div class="invalid-feedback">
+				{{ _errors.get('entryPoint') }}
+			</div>
+		{% endif %}
+		<input
+		type="date" name="targetDate" value="{{ targetDate }}">
+	<!-- Rest of your form -->
+	</form>
 </div>

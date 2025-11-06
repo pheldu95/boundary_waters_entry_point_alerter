@@ -40,8 +40,7 @@
 													</form>
 												</div>
 												<twig:EditPermitWatchForm
-													permitWatchId="{{ permitWatch.id }}"
-													entryPointId="{{ permitWatch.entryPoint.id }}"
+													entryPoint="{{ permitWatch.entryPoint }}"
 													targetDate="{{ permitWatch.targetDate|date('Y-m-d') }}"
 												/>
 											</div>
