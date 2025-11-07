@@ -18,22 +18,22 @@ class PermitWatchController extends AbstractController
     {
         $permitWatch = new PermitWatch();
         $form = $this->createForm(PermitWatchType::class, $permitWatch);
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Set the current user
             $permitWatch->setUser($this->getUser());
             $permitWatch->setIsActive(true);
-            
+
             $em->persist($permitWatch);
             $em->flush();
-            
+
             $this->addFlash('success', 'Permit watch created successfully!');
-            
+
             return $this->redirectToRoute('app_my_permit_watches');
         }
-        
+
         return $this->render('permitWatch/new.html.twig', [
             'form' => $form,
         ]);
@@ -43,7 +43,10 @@ class PermitWatchController extends AbstractController
     public function show(PermitWatchRepository $permitWatchRepository): Response
     {
         $user = $this->getUser();
-        $permitWatches = $permitWatchRepository->findBy(['user' => $user]);
+        $permitWatches = $permitWatchRepository->findBy(
+            ['user' => $user],
+            ['targetDate' => 'ASC', 'createdAt' => 'DESC']
+        );
 
         return $this->render('permitWatch/permitWatches.html.twig', [
             'permitWatches' => $permitWatches,
@@ -53,7 +56,7 @@ class PermitWatchController extends AbstractController
     #[Route('/permit_watch/delete/{id}', name: 'app_permit_watch_delete')]
     public function delete(Request $request, PermitWatch $permitWatch, EntityManagerInterface $em): Response
     {
-        if (!$this->isCsrfTokenValid('delete'.$permitWatch->getId(), $request->request->get('_token'))) {
+        if (!$this->isCsrfTokenValid('delete' . $permitWatch->getId(), $request->request->get('_token'))) {
             throw $this->createAccessDeniedException('Invalid CSRF token.');
         }
 
