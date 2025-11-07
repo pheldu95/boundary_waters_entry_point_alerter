@@ -1,19 +1,50 @@
-<div>
-	<!-- Your form HTML here -->
-	<form>
-		<select data-model="entryPoint" id="entry-point" class="form-control {{ _errors.has('entryPoint') ? 'is-invalid' }}">
-			<option value="">Choose an EntryPoint</option>
-			{% for entryPoint in entryPoints %}
-				<option value="{{ entryPoint.id }}" {{ this.isCurrentEntryPoint(entryPoint) ? 'selected' }}>{{ entryPoint.name }}</option>
-			{% endfor %}
-		</select>
-		{% if _errors.has('entryPoint') %}
-			<div class="invalid-feedback">
-				{{ _errors.get('entryPoint') }}
-			</div>
-		{% endif %}
-		<input
-		type="date" name="targetDate" value="{{ targetDate }}">
-	<!-- Rest of your form -->
-	</form>
+<div{{ attributes }}>
+    <form data-action="live#action:prevent" data-live-action-param="savePermitWatch">
+        <div class="mt-4">
+            <label class="block mb-2 text-sm font-medium text-white required" for="permit_watch_entryPoint">Entry Point</label>
+            <select 
+                data-model="entryPoint" 
+                id="permit_watch_entryPoint" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {{ _errors.has('entryPoint') ? 'is-invalid' }}"
+            >
+                <option value="">Choose an EntryPoint</option>
+                {% for entryPoint in entryPoints %}
+                    <option value="{{ entryPoint.id }}" {{ this.isCurrentEntryPoint(entryPoint) ? 'selected' }}>{{ entryPoint.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% if _errors.has('entryPoint') %}
+            <div class="invalid-feedback text-red-500 text-sm mt-1">
+                {{ _errors.get('entryPoint') }}
+            </div>
+        {% endif %}
+        
+        <div class="mt-4">
+            <label class="block mb-2 text-sm font-medium text-white required" for="permit_watch_targetDate">Select a date</label>
+            <input 
+                type="date" 
+                data-model="targetDate"
+                id="permit_watch_targetDate" 
+                value="{{ targetDate }}" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white {{ _errors.has('targetDate') ? 'is-invalid' }}"
+            >
+        </div>
+        {% if _errors.has('targetDate') %}
+            <div class="invalid-feedback text-red-500 text-sm mt-1">
+                {{ _errors.get('targetDate') }}
+            </div>
+        {% endif %}
+        
+        <div class="mt-4">
+            <div>
+                <button 
+                    type="submit" 
+                    id="permit_watch_submit" 
+                    class="w-full text-gray-900 bg-amber-400 hover:bg-amber-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer"
+                >
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
 </div>
