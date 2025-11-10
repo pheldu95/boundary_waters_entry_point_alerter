@@ -4,6 +4,7 @@ namespace App\MessageHandler;
 use App\Message\ScrapeEntryPointForPermitMessage;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use WebScrapingClient;
 
 #[AsMessageHandler]
 class ScrapeEntryPointForPermitMessageHandler
@@ -23,5 +24,10 @@ class ScrapeEntryPointForPermitMessageHandler
 
         //You can also just dump it to see it working
         dump('Handler processing: ' . $message->getPermitWatch()->getEntryPoint()->getName());
+
+        $webScrapingClient = new WebScrapingClient();
+        $result = $webScrapingClient->scrapeWebsite('https://www.recreation.gov/api/permits/233396/availability/month?start_date=2026-01-01T00:00:00.000Z&commercial_acct=false');
+
+        dump($result);
     }
 }
