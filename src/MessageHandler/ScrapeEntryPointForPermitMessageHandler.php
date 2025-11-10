@@ -22,11 +22,13 @@ class ScrapeEntryPointForPermitMessageHandler
             'timestamp' => date('Y-m-d H:i:s')
         ]);
 
-        //You can also just dump it to see it working
+        //Just to see that it's working
         dump('Handler processing: ' . $message->getPermitWatch()->getEntryPoint()->getName());
 
+        //Todo: Use actual permit watch date in the url
         $webScrapingClient = new WebScrapingClient();
-        $result = $webScrapingClient->scrapeWebsite('https://www.recreation.gov/api/permits/233396/availability/month?start_date=2026-01-01T00:00:00.000Z&commercial_acct=false');
+        $result = $webScrapingClient;
+        $result = $webScrapingClient->scrapeJson('https://www.recreation.gov/api/permits/233396/availability/month?start_date=2026-01-01T00:00:00.000Z&commercial_acct=false');
 
         dump($result);
     }

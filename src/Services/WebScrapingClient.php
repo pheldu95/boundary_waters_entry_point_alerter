@@ -3,8 +3,8 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use Symfony\Component\Panther\Client;
-use Symfony\Component\Panther\PantherTestCase;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpClient\HttpClient;
 
 class WebScrapingClient
 {
@@ -40,6 +40,23 @@ class WebScrapingClient
             return $data;
         } catch (\Exception $e) {
             throw new \RuntimeException("Scraping failed: " . $e->getMessage());
+        }
+    }
+
+    public function scrapeJson(string $url): array
+    {
+        try {
+            $client = HttpClient::create();
+            $response = $client->request('GET', $url);
+
+            $statusCode = $response->getStatusCode();
+            $contentType = $response->getHeaders()['content-type'][0];
+            $content = $response->getContent();
+            $data = $response->toArray();
+
+            return $data;
+        } catch (\Exception $e) {
+            throw new \RuntimeException("Scraping JSON failed: " . $e->getMessage());
         }
     }
 
