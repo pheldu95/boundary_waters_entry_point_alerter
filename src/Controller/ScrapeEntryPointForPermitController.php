@@ -13,8 +13,11 @@ class ScrapeEntryPointForPermitController extends AbstractController
     #[Route('/test_messenger', name: 'test_messenger')]
     public function testMessenger(MessageBusInterface $bus): Response
     {
-        $bus->dispatch(new ScrapeEntryPointForPermitMessage($this->getUser()->getPermitWatches()->first(), $this->getUser()));
+        /** @var User $user */
+        $user = $this->getUser();
 
-        return new Response('Message dispatched! Check your logs or console. Permit watch entry point: ' . $this->getUser()->getPermitWatches()->first()->getEntryPoint()->getName());
+        $bus->dispatch(new ScrapeEntryPointForPermitMessage($user->getPermitWatches()->last(), $this->getUser()));
+
+        return new Response('Message dispatched! Check your logs or console. Permit watch entry point: ' . $user->getPermitWatches()->last()->getEntryPoint()->getName());
     }
 }
