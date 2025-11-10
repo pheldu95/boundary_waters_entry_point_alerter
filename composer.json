@@ -31,7 +31,7 @@
         "symfony/mailer": "7.3.*",
         "symfony/messenger": "7.3.*",
         "symfony/mime": "7.3.*",
-        "symfony/monolog-bundle": "^3.0",
+        "symfony/monolog-bundle": "^3.10",
         "symfony/notifier": "7.3.*",
         "symfony/panther": "^2.2",
         "symfony/process": "7.3.*",
