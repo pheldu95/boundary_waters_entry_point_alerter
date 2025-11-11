@@ -1,5 +1,25 @@
+{% apply inline_css %}
 <html>
-	<head></head>
+	<head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+            }
+            a {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 10px 15px;
+                background-color: #28a745;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+            a:hover {
+                background-color: #218838;
+            }
+        </style>
+    </head>
 	<body>
 		<p>A permit has become available at
 			{{ entryPointName }}
@@ -9,3 +29,5 @@
 		<a href="https://www.recreation.gov/permits/233396">Secure your permit!</a>
 	</body>
 </html>
+
+{% endapply %}
