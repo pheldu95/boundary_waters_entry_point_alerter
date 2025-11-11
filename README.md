@@ -56,3 +56,6 @@ Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helia
 # My Notes
 
 Using mailtrap for testing email sending https://symfonycasts.com/screencast/mailtrap/mailtrap-email-testing#play
+
+For production:
+https://symfonycasts.com/screencast/mailtrap/production-sending-mailtrap
