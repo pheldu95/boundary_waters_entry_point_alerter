@@ -52,3 +52,10 @@ Symfony Docker is available under the MIT License.
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+
+# My Notes
+
+Using mailtrap for testing email sending https://symfonycasts.com/screencast/mailtrap/mailtrap-email-testing#play
+
+For production:
+https://symfonycasts.com/screencast/mailtrap/production-sending-mailtrap

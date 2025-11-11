@@ -2,6 +2,7 @@
 namespace App\MessageHandler;
 
 use App\Message\ScrapeEntryPointForPermitMessage;
+use App\Services\SendPermitAlertEmail;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use WebScrapingClient;
@@ -10,7 +11,8 @@ use WebScrapingClient;
 class ScrapeEntryPointForPermitMessageHandler
 {
     public function __construct(
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
+        private SendPermitAlertEmail $sendPermitAlertEmail
     ) {}
 
     public function __invoke(ScrapeEntryPointForPermitMessage $message)
@@ -30,6 +32,6 @@ class ScrapeEntryPointForPermitMessageHandler
         $result = $webScrapingClient;
         $result = $webScrapingClient->scrapeJson('https://www.recreation.gov/api/permits/233396/availability/month?start_date=2026-01-01T00:00:00.000Z&commercial_acct=false');
 
-        // dump($result);
+        $this->sendPermitAlertEmail->sendPermitAlert($message->getPermitWatch());
     }
 }
