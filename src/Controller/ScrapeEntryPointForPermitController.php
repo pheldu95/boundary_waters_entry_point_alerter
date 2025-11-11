@@ -16,7 +16,7 @@ class ScrapeEntryPointForPermitController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        $bus->dispatch(new ScrapeEntryPointForPermitMessage($user->getPermitWatches()->last(), $this->getUser()));
+        $bus->dispatch(new ScrapeEntryPointForPermitMessage($user->getPermitWatches()->last()));
 
         return new Response('Message dispatched! Check your logs or console. Permit watch entry point: ' . $user->getPermitWatches()->last()->getEntryPoint()->getName());
     }
