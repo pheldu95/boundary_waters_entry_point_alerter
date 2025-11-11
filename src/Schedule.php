@@ -27,6 +27,7 @@ class Schedule implements ScheduleProviderInterface
             // see https://symfony.com/doc/current/scheduler.html#attaching-recurring-messages-to-a-schedule
             ->add(
                 RecurringMessage::cron('# * * * *', new RunCommandMessage('app:check-permit-watches')) //every hour
+                // RecurringMessage::cron('* * * * *', new RunCommandMessage('app:check-permit-watches')) //every minute
             )        
         ;
     }

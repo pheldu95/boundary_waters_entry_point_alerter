@@ -16,28 +16,20 @@ class PermitWatchRepository extends ServiceEntityRepository
         parent::__construct($registry, PermitWatch::class);
     }
 
-    //    /**
-    //     * @return PermitWatch[] Returns an array of PermitWatch objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?PermitWatch
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Find all active permit watches with their related entities fully loaded
+     * 
+     * @return PermitWatch[]
+     */
+    public function findActiveWithRelations(): array
+    {
+        return $this->createQueryBuilder('pw')
+            ->select('pw', 'u', 'ep')
+            ->leftJoin('pw.user', 'u')
+            ->leftJoin('pw.entryPoint', 'ep')
+            ->where('pw.isActive = :active')
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -35,7 +35,7 @@ class CheckPermitWatchesCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         
-        $permitWatches = $this->permitWatchRepository->findAll(['isActive' => true]);
+        $permitWatches = $this->permitWatchRepository->findActiveWithRelations();
 
         foreach ($permitWatches as $permitWatch) {
             $this->bus->dispatch(new ScrapeEntryPointForPermitMessage($permitWatch));
