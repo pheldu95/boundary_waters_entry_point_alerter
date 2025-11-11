@@ -17,7 +17,6 @@ class ScrapeEntryPointForPermitMessageHandler
     {
         $this->logger->info('ScrapeEntryPointForPermitMessage received!');
         $this->logger->info('Message received!', [
-            'user' => $message->getUser()->getEmail(),
             'entryPoint' => $message->getPermitWatch()->getEntryPoint(),
             'timestamp' => date('Y-m-d H:i:s')
         ]);
