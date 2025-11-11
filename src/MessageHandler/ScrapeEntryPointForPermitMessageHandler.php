@@ -29,8 +29,10 @@ class ScrapeEntryPointForPermitMessageHandler
 
         //Todo: Use actual permit watch date in the url
         $webScrapingClient = new WebScrapingClient();
-        $result = $webScrapingClient;
-        $result = $webScrapingClient->scrapeJson('https://www.recreation.gov/api/permits/233396/availability/month?start_date=2026-01-01T00:00:00.000Z&commercial_acct=false');
+
+        // commenting out for now so we aren't scraping their site too much during testing
+        // $result = $webScrapingClient;
+        // $result = $webScrapingClient->scrapeJson('https://www.recreation.gov/api/permits/233396/availability/month?start_date=2026-01-01T00:00:00.000Z&commercial_acct=false');
 
         $this->sendPermitAlertEmail->sendPermitAlert($message->getPermitWatch());
     }
