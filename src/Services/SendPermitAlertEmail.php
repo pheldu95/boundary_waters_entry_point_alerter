@@ -20,14 +20,15 @@ class SendPermitAlertEmail
 
     /**
      * Send a permit alert email.
-     *
-     * @param string $emailAddress Recipient e-mail address
+     * 
      * @param PermitWatch  $permitWatch
      *
      * @return bool
      */
-    public function sendPermitAlert(string $emailAddress, PermitWatch $permitWatch): bool
+    public function sendPermitAlert(PermitWatch $permitWatch): bool
     {
+        $emailAddress = $permitWatch->getUser()->getEmail();
+        
         $this->logger->info('Sending permit alert email to ' . $emailAddress);
 
         $email = (new Email())
