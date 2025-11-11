@@ -12,7 +12,7 @@
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
 </head>
-<body class="text-white antialiased" style="background: linear-gradient(135deg, #0d4a3e 0%, #1a5c4d 50%, #0d4a3e 100%);">
+<body class="bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('{{ asset('images/site_background.jpg') }}');">
     <div class="flex flex-col min-h-screen bg-emerald-900/95">
         <header class="backdrop-blur-sm bg-white/5 border-b border-white/10 shadow-lg sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
