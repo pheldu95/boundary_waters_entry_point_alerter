@@ -4,9 +4,10 @@ namespace App\Services;
 
 use App\Entity\PermitWatch;
 use Psr\Log\LoggerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Address;
 
 class SendPermitAlertEmail
 {
@@ -28,15 +29,18 @@ class SendPermitAlertEmail
     public function sendPermitAlert(PermitWatch $permitWatch): bool
     {
         $emailAddress = $permitWatch->getUser()->getEmail();
-        
+
         $this->logger->info('Sending permit alert email to ' . $emailAddress);
 
-        $email = (new Email())
-            ->from('alert@entry-point-alerter.com')
+        $email = (new TemplatedEmail())
+            ->from(new Address('alert@entry-point-alerter.com', 'Entry Point Alerter'))
             ->to($emailAddress)
             ->subject($permitWatch->getEntryPoint()->getName() . ' Permit Available!')
-            ->text('A permit has become available at ' . $permitWatch->getEntryPoint()->getName() . 
-                ' on ' . $permitWatch->getTargetDate()->format('Y-m-d') . '.')
+            ->textTemplate('/email/permit_alert.txt.twig')
+            ->context([
+                'entryPointName' => $permitWatch->getEntryPoint()->getName(),
+                'targetDate' => $permitWatch->getTargetDate()->format('Y-m-d')
+            ])
         ;
         
         try {
@@ -48,6 +52,7 @@ class SendPermitAlertEmail
             return false;
         }
 
+        $this->logger->info('Sent permit alert email to ' . $emailAddress);
         return true;
     }
 }
