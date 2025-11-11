@@ -3,19 +3,6 @@
 {% block title %}Boundary Waters Entry Point Alerter!{% endblock %}
 
 {% block body %}
-    {# glowy background affect #}
-    <div class="fixed inset-0 overflow-hidden pointer-events-none opacity-30">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl" style="animation: pulse-glow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" style="animation: pulse-glow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; animation-delay: 2s;"></div>
-    </div>
-
-    <style>
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-        }
-    </style>
-
     <div class="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] text-center px-4">
     <div class="max-w-2xl space-y-8">
         <h1 class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-amber-500 bg-clip-text text-transparent leading-tight">
