@@ -36,6 +36,7 @@ class SendPermitAlertEmail
             ->from(new Address('alert@entry-point-alerter.com', 'Entry Point Alerter'))
             ->to($emailAddress)
             ->subject($permitWatch->getEntryPoint()->getName() . ' Permit Available!')
+            ->htmlTemplate('/email/permit_alert.html.twig')
             ->textTemplate('/email/permit_alert.txt.twig')
             ->context([
                 'entryPointName' => $permitWatch->getEntryPoint()->getName(),
