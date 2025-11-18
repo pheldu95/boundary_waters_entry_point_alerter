@@ -5,7 +5,7 @@ use App\Message\ScrapeEntryPointForPermitMessage;
 use App\Services\SendPermitAlertEmail;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use WebScrapingClient;
+use App\Services\WebScrapingClient;
 
 #[AsMessageHandler]
 class ScrapeEntryPointForPermitMessageHandler
