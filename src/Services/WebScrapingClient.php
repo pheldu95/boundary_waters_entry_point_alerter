@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
+namespace App\Services;
 
 use Symfony\Component\Panther\Client;
 use Symfony\Component\DomCrawler\Crawler;
