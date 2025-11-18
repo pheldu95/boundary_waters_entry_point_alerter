@@ -23,4 +23,14 @@ class EntryPointController extends AbstractController
             'entryPoint' => $entryPoint,
         ]);
     }
+
+    #[Route('/entry-points', name: 'app_entry_point_list')]
+    public function showList(EntryPointRepository $entryPointRepository): Response
+    {
+        $entryPoints = $entryPointRepository->findAll();
+
+        return $this->render('entryPoint/entryPointList.html.twig', [
+            'entryPoints' => $entryPoints,
+        ]);
+    }
 }

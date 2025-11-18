@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of all entry points{% endblock %}
+
+{% block body %}
+    {% for entryPoint in entryPoints %}
+        <h1>{{ entryPoint.name }}</h1>
+        <h3>{{ entryPoint.number }}</h3>
+    {% endfor %}
+{% endblock %}
