@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EntryPointRepository::class)]
 #[ApiResource(
-    paginationEnabled: false,
+    paginationEnabled: true,
 )]
 class EntryPoint
 {

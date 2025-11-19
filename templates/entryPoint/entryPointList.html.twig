@@ -1,10 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}List of all entry points{% endblock %}
+{% block title %}List of all entry points
+{% endblock %}
 
 {% block body %}
-    {% for entryPoint in entryPoints %}
-        <h1>{{ entryPoint.name }}</h1>
-        <h3>{{ entryPoint.number }}</h3>
-    {% endfor %}
+	{% for entryPoint in items %}
+		{{ entryPoint.name }}<br>
+	{% endfor %}
+
+	<div class="pagination">
+		{% if view and view['previous'] %}
+			<a href="{{ path('app_entry_point_list', {'page': currentPage - 1}) }}">Prev</a>
+		{% endif %}
+
+		Page
+		{{ currentPage }}
+
+		{% if view and view['next'] %}
+			<a href="{{ path('app_entry_point_list', {'page': currentPage + 1}) }}">Next</a>
+		{% endif %}
+	</div>
 {% endblock %}
