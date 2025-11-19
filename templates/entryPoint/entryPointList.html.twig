@@ -9,14 +9,14 @@
 	{% endfor %}
 
 	<div class="pagination">
-		{% if view and view['previous'] %}
+		{% if view and view['previous'] is defined %}
 			<a href="{{ path('app_entry_point_list', {'page': currentPage - 1}) }}">Prev</a>
 		{% endif %}
 
 		Page
 		{{ currentPage }}
 
-		{% if view and view['next'] %}
+		{% if view and view['next'] is defined %}
 			<a href="{{ path('app_entry_point_list', {'page': currentPage + 1}) }}">Next</a>
 		{% endif %}
 	</div>

@@ -31,7 +31,8 @@ class EntryPointController extends AbstractController
     {
         $page = $request->query->getInt('page', 1);
 
-        $response = $client->request('GET', 'http://localhost/api/entry_points?page=' . $page);
+        $apiBaseUrl = $this->getParameter('api_base_url');
+        $response = $client->request('GET', $apiBaseUrl. '/entry_points?page=' . $page);
 
         $data = $response->toArray();
 
