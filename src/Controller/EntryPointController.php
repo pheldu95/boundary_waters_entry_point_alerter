@@ -27,20 +27,12 @@ class EntryPointController extends AbstractController
     }
 
     #[Route('/entry-points', name: 'app_entry_point_list')]
-    public function showList(HttpClientInterface $client, Request $request): Response
+    public function showList(EntryPointRepository $entryPointRepository): Response
     {
-        $page = $request->query->getInt('page', 1);
-
-        $apiBaseUrl = $this->getParameter('api_base_url');
-        $response = $client->request('GET', $apiBaseUrl. '/entry_points?page=' . $page);
-
-        $data = $response->toArray();
+        $entryPoints = $entryPointRepository->findAll();
 
         return $this->render('entryPoint/entryPointList.html.twig', [
-            'items'        => $data['member'],
-            'totalItems'   => $data['totalItems'],
-            'view'         => $data['view'] ?? null,
-            'currentPage'  => $page,
+            'entryPoints' => $entryPoints,
         ]);
     }
 }
